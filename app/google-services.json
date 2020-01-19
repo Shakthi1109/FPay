@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "986045323458",
+    "firebase_url": "https://fpay-e4498.firebaseio.com",
+    "project_id": "fpay-e4498",
+    "storage_bucket": "fpay-e4498.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986045323458:android:c087f4288dc371714d035b",
+        "android_client_info": {
+          "package_name": "SecuGen.Demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986045323458-clhgmvfumqrapbttfcknlq9gj8hmujpp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "SecuGen.Demo",
+            "certificate_hash": "f9940d0c0ead168e8fae75e6fb2a85fc037fa9c4"
+          }
+        },
+        {
+          "client_id": "986045323458-gspjh9htkorbj885jmpujepcreshnob0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaVStvxJAlh7GGotfp5KONbUe3rOU68is"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986045323458-gspjh9htkorbj885jmpujepcreshnob0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
