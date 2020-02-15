@@ -8,7 +8,7 @@ public class Member {
     String nameStr;
     float amtFloat;
     String template;
-
+    byte [] FPTemplate;
 
     public  String getTemplate() {return template;}
 

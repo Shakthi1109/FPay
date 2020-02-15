@@ -684,7 +684,7 @@ public class JSGDActivity extends Activity
             mVerifyImage = new byte[mImageWidth*mImageHeight];
             dwTimeStart = System.currentTimeMillis();          
     	    long result = sgfplib.GetImageEx(mVerifyImage, IMAGE_CAPTURE_TIMEOUT_MS,IMAGE_CAPTURE_QUALITY);
-            DumpFile("verify.raw", mVerifyImage);
+            //DumpFile("verify.raw", mVerifyImage);
             dwTimeEnd = System.currentTimeMillis();
             dwTimeElapsed = dwTimeEnd-dwTimeStart;
             debugMessage("GetImageEx() ret:" + result + " [" + dwTimeElapsed + "ms]\n");

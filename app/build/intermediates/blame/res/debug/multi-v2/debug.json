@@ -1106,62 +1106,6 @@
             ]
         },
         {
-            "outputFile": "D:\\Desktop\\FPayFinal\\SecuGenUSBDist\\app\\build\\intermediates\\res\\merged\\debug\\values-as_values-as.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\SHAKTHI\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0.aar\\37256ab1e982b4d044c48fcb7dc7b294\\res\\values-as\\values-as.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "20",
-                        "startColumns": "4",
-                        "startOffsets": "2714",
-                        "endColumns": "100",
-                        "endOffsets": "2810"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\SHAKTHI\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-17.0.0.aar\\fd3bd9ba5ba5e6850b5665a3bcd739d5\\res\\values-as\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "184",
-                        "endOffsets": "431"
-                    },
-                    "to": {
-                        "startLines": "10",
-                        "startColumns": "4",
-                        "startOffsets": "1235",
-                        "endColumns": "184",
-                        "endOffsets": "1415"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\SHAKTHI\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-17.0.0.aar\\c48bddfb834e22bb0ae0f4100c71dd42\\res\\values-as\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "245,351,536,657,765,954,1074,1213,1351,1553,1659,1839,1961,2152,2331,2417,2509",
-                        "endColumns": "105,184,120,107,188,119,138,137,201,105,179,121,190,178,85,91,111",
-                        "endOffsets": "350,535,656,764,953,1073,1212,1350,1552,1658,1838,1960,2151,2330,2416,2508,2620"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,215,400,525,637,826,950,1093,1420,1622,1732,1912,2038,2229,2412,2502,2598",
-                        "endColumns": "109,184,124,111,188,123,142,141,201,109,179,125,190,182,89,95,115",
-                        "endOffsets": "210,395,520,632,821,945,1088,1230,1617,1727,1907,2033,2224,2407,2497,2593,2709"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "D:\\Desktop\\FPayFinal\\SecuGenUSBDist\\app\\build\\intermediates\\res\\merged\\debug\\values-nl_values-nl.arsc.flat",
             "map": [
                 {
@@ -2578,62 +2522,6 @@
                         "startOffsets": "105,211,319,442,547,652,738,838,951,1028,1104,1183,1284,1385,1482,1591,1690,1800,1922,4778,4857",
                         "endColumns": "105,107,122,104,104,85,99,112,76,75,78,100,100,96,108,98,109,121,99,78,100",
                         "endOffsets": "206,314,437,542,647,733,833,946,1023,1099,1178,1279,1380,1477,1586,1685,1795,1917,2017,4852,4953"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "D:\\Desktop\\FPayFinal\\SecuGenUSBDist\\app\\build\\intermediates\\res\\merged\\debug\\values-or_values-or.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\SHAKTHI\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-17.0.0.aar\\c48bddfb834e22bb0ae0f4100c71dd42\\res\\values-or\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "245,354,547,678,793,1008,1142,1283,1418,1645,1756,1948,2080,2291,2475,2566,2664",
-                        "endColumns": "108,192,130,114,214,133,140,134,226,110,191,131,210,183,90,97,111",
-                        "endOffsets": "353,546,677,792,1007,1141,1282,1417,1644,1755,1947,2079,2290,2474,2565,2663,2775"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,218,411,546,665,880,1018,1163,1501,1728,1843,2035,2171,2382,2570,2665,2767",
-                        "endColumns": "112,192,134,118,214,137,144,138,226,114,191,135,210,187,94,101,115",
-                        "endOffsets": "213,406,541,660,875,1013,1158,1297,1723,1838,2030,2166,2377,2565,2660,2762,2878"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\SHAKTHI\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-17.0.0.aar\\fd3bd9ba5ba5e6850b5665a3bcd739d5\\res\\values-or\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "198",
-                        "endOffsets": "445"
-                    },
-                    "to": {
-                        "startLines": "10",
-                        "startColumns": "4",
-                        "startOffsets": "1302",
-                        "endColumns": "198",
-                        "endOffsets": "1496"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\SHAKTHI\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0.aar\\37256ab1e982b4d044c48fcb7dc7b294\\res\\values-or\\values-or.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "20",
-                        "startColumns": "4",
-                        "startOffsets": "2883",
-                        "endColumns": "100",
-                        "endOffsets": "2979"
                     }
                 }
             ]
@@ -4099,21 +3987,6 @@
             ]
         },
         {
-            "outputFile": "D:\\Desktop\\FPayFinal\\SecuGenUSBDist\\app\\build\\intermediates\\res\\merged\\debug\\values-en-rXC_values-en-rXC.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\SHAKTHI\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0.aar\\37256ab1e982b4d044c48fcb7dc7b294\\res\\values-en-rXC\\values-en-rXC.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "202",
-                        "endOffsets": "253"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "D:\\Desktop\\FPayFinal\\SecuGenUSBDist\\app\\build\\intermediates\\res\\merged\\debug\\values-hu_values-hu.arsc.flat",
             "map": [
                 {
@@ -4380,21 +4253,6 @@
                         "startOffsets": "2068,2172,2366,2493,2602,2826,2958,3115,3443,3683,3792,3984,4116,4334,4513,4611,4705",
                         "endColumns": "103,193,126,108,223,131,156,132,239,108,191,131,217,178,97,93,109",
                         "endOffsets": "2167,2361,2488,2597,2821,2953,3110,3243,3678,3787,3979,4111,4329,4508,4606,4700,4810"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "D:\\Desktop\\FPayFinal\\SecuGenUSBDist\\app\\build\\intermediates\\res\\merged\\debug\\values-en-rCA_values-en-rCA.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\SHAKTHI\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0.aar\\37256ab1e982b4d044c48fcb7dc7b294\\res\\values-en-rCA\\values-en-rCA.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
                     }
                 }
             ]

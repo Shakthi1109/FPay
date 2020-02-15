@@ -87,6 +87,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     Button registerBtn,choose,upload;
     EditText Name, Amt;
     String nameStr,template,uploadToFirebase;
+
     float amtFloat;
 
     String fpimg;
@@ -541,10 +542,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
 
         int[] size = new int[1];
         result = sgfplib.GetTemplateSize(mRegisterTemplate, size);
+        Log.d("RegisterAct",mRegisterTemplate.toString());
 
-        uploadToFirebase = Arrays.toString(mRegisterTemplate);
+        uploadToFirebase= Arrays.toString(mRegisterTemplate);
 
 
+//        uploadToFirebase=new String(mRegisterTemplate);
+        Log.d("RegisterAct",Arrays.toString(mRegisterTemplate));
 
 
 
@@ -637,23 +641,23 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
 
     }
 
-    private void fileChoose(){
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,1);
-    }
+//    private void fileChoose(){
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(intent,1);
+//    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null)
-        {
-            imguri=data.getData();
-            mImageViewFingerprint.setImageURI(imguri);
-
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null)
+//        {
+//            imguri=data.getData();
+//            mImageViewFingerprint.setImageURI(imguri);
+//
+//        }
+//    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void onClick(View v) {
@@ -663,9 +667,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
             CaptureFingerPrint();
         }
 
-        if (v==choose){
-            fileChoose();
-        }
+//        if (v==choose){
+//            fileChoose();
+//        }
 
 //        if(v==upload){
 //            Fileuploader();
