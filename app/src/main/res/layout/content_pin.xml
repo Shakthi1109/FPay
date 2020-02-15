@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="SecuGen.Demo.pinActivity">
+
+
+    <EditText
+        android:id="@+id/pin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="72dp"
+        android:layout_y="79dp"
+        android:ems="10"
+        android:hint="Enter PIN"
+        android:gravity="center"
+        android:inputType="numberPassword"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="140dp" />
+
+    <Button
+        android:id="@+id/subBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="122dp"
+        android:layout_y="175dp"
+        android:text="SUBMIT"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="164dp" />
+
+
+</AbsoluteLayout>

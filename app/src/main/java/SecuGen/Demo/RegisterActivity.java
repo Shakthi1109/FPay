@@ -79,13 +79,16 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     private boolean usbPermissionRequested;
     String NFIQString,buffer;
 
+    String email;
+
+
 
     private byte[] mRegisterImage;
     private byte[] mRegisterTemplate;
 
 
     Button registerBtn,choose,upload;
-    EditText Name, Amt;
+    EditText Name, Amt,Email,pinInput;
     String nameStr,template,uploadToFirebase;
 
     float amtFloat;
@@ -147,6 +150,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
         Name = (EditText) findViewById(R.id.editName);
         Amt = (EditText) findViewById(R.id.editAmt);
         registerBtn = (Button)findViewById(R.id.registerBtn);
+        Email=(EditText) findViewById(R.id.email);
+        pinInput=(EditText) findViewById(R.id.pinInput);
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
@@ -200,6 +205,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
                 else {
                     nameStr = Name.getText().toString().trim();
                     amtFloat = Float.valueOf(Amt.getText().toString().trim());
+                    email = Email.getText().toString().trim();
+                    int PIN = Integer.valueOf(pinInput.getText().toString().trim());
+
                     if(mRegisterTemplate==null)
                     {
                         Toast.makeText(RegisterActivity.this,"Enrol finger",Toast.LENGTH_SHORT).show();
@@ -209,8 +217,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
                     member.setNameStr(nameStr);
                     member.setAmtFloat(amtFloat);
                     member.setTemplate(template);
+                    member.setPin(PIN);
 
-                    reff.child(String.valueOf(maxid+1)).setValue(member);
+                    reff.child(email).setValue(member);
                     Toast.makeText(RegisterActivity.this,"Successfully Registered",Toast.LENGTH_SHORT).show();
                 }
 

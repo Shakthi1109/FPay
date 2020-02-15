@@ -8,7 +8,15 @@ public class Member {
     String nameStr;
     float amtFloat;
     String template;
-    byte [] FPTemplate;
+    int pin;
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
+    }
 
     public  String getTemplate() {return template;}
 

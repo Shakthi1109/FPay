@@ -47,6 +47,10 @@
     <string name="set_brightness_0">Set Brightness 0</string>
     <string name="set_brightness_100">Set Brightness 100</string>
     <string name="log">Log</string>
+    <string name="hi">Hi!</string>
+    <string name="sufficient">You have sufficient balance. Proceed to pay</string>
+    <string name="notSufficient">You don\'t have sufficient balance</string>
+    <string name="title_activity_pin">pinActivity</string>
 
 </resources>
 

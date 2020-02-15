@@ -106,9 +106,13 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
 
     byte [] regFP;  //this and above are used for comparison
 
+    String emailInp;
+    EditText EmailInp;
+
 
     Button registerBtn,choose,upload;
     EditText Name, Amt;
+    TextView hi;
     String nameStr,registeredFpTemplate,TemplateComparisonInput, name,amount;
     float amtFloat;
 
@@ -170,12 +174,15 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
         mButtonLed.setOnClickListener(this);
         mImageViewFingerprint = (ImageView)findViewById(R.id.imageViewPayment);
         // ends here
-
+        Button paybtn;
         nextbtn = (Button) findViewById(R.id.nextbtn);
+        paybtn = (Button) findViewById(R.id.paybtn);
         regBtn = (Button) findViewById(R.id.regBtn);
         cost = (EditText) findViewById(R.id.cost);
+        EmailInp=(EditText) findViewById(R.id.emailInput);
 
         nameTV = (TextView) findViewById(R.id.textViewName);
+        hi=(TextView) findViewById(R.id.hi);
         amountTV = (TextView) findViewById(R.id.textViewAmount);
 //       templateTV = (TextView) findViewById(R.id.textViewTemplate);
         buttonRetrive = (Button) findViewById(R.id.buttonRetrive);
@@ -211,40 +218,43 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
         buttonRetrive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reff = FirebaseDatabase.getInstance().getReference().child("Member").child("1");
-                reff.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        name = dataSnapshot.child("nameStr").getValue().toString();
-                        amount = dataSnapshot.child("amtFloat").getValue().toString();
-                        registeredFpTemplate = dataSnapshot.child("template").getValue().toString();
-                        nameTV.setText(name);
-                        amountTV.setText(amount);
+                SUCCESSFLAG=0;
+                emailInp = EmailInp.getText().toString().trim();
+                Log.d(TAG, "nowcheck: "+emailInp);
+                    reff = FirebaseDatabase.getInstance().getReference().child("Member").child(emailInp);
+                    reff.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            name = dataSnapshot.child("nameStr").getValue().toString();
+                            amount = dataSnapshot.child("amtFloat").getValue().toString();
+                            registeredFpTemplate = dataSnapshot.child("template").getValue().toString();
 //                        Log.d("Redistered fp template",registeredFpTemplate);
 
-                        String a[]= registeredFpTemplate.split(", ");
-                         regFP =new byte[a.length];
-                        for(int i=0;i<a.length;i++){
-                            Log.d(TAG, "onDataChange: "+a[i]);
-                            if(i==0){
-                                regFP[i]=Byte.valueOf(a[i].substring(1));
+                            String a[]= registeredFpTemplate.split(", ");
+                            regFP =new byte[a.length];
+                            for(int i=0;i<a.length;i++){
+                                Log.d(TAG, "onDataChange: "+a[i]);
+                                if(i==0){
+                                    regFP[i]=Byte.valueOf(a[i].substring(1));
 
-                            }else if(i==a.length-1){
-                                regFP[i]=Byte.valueOf(a[i].substring(0,a[i].length()-1));
+                                }else if(i==a.length-1){
+                                    regFP[i]=Byte.valueOf(a[i].substring(0,a[i].length()-1));
 
-                            }else{
-                                regFP[i]=Byte.valueOf(a[i]);
+                                }else{
+                                    regFP[i]=Byte.valueOf(a[i]);
+                                }
                             }
+                            Log.d(TAG, "array from db: "+Arrays.toString(regFP));
+
+
                         }
-                        Log.d(TAG, "array from db: "+Arrays.toString(regFP));
 
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
 
-                    }
-                });
             }
         });
 
@@ -266,6 +276,17 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
             @Override
             public void onClick(View v) {
                 matchingFingerprint(mRegisterTemplate, regFP);
+            }
+        });
+
+        paybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = emailInp+"    "+amtFloat;
+
+                Intent intent = new Intent(HomeActivity.this, pinActivity.class);
+                intent.putExtra("message",message);
+                startActivity(intent);
             }
         });
 //
@@ -465,11 +486,11 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
         fingerDetectedHandler.sendMessage(new Message());
     }
 
-    int matchingFingerprint(byte [] regFP, byte[] scannedFpTemplate){
+    void matchingFingerprint(byte [] regFP, byte[] scannedFpTemplate){
 
             boolean[] matched = new boolean[1];
             //dwTimeStart = System.currentTimeMillis();
-            long result = sgfplib.MatchTemplate(scannedFpTemplate, regFP, SGFDxSecurityLevel.SL_NORMAL, matched);
+            sgfplib.MatchTemplate(regFP,scannedFpTemplate,SGFDxSecurityLevel.SL_NORMAL, matched);
 
             Log.d("output user",Arrays.toString(scannedFpTemplate));
             Log.d("output data",Arrays.toString(regFP));
@@ -483,21 +504,29 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
 //            debugMessage("MatchTemplate() ret:" + result+ " [" + dwTimeElapsed + "ms]\n");
             if (matched[0]) {
                 Toast.makeText(HomeActivity.this,"MATCHED",Toast.LENGTH_SHORT).show();
+
+                    payable = Float.valueOf(cost.getText().toString().trim());
+
+
+                    //amountTV.setText(amount);
+                amtFloat=Float.valueOf(amount);
+                    if(payable<amtFloat)
+                    {
+                        hi.setText(R.string.hi);
+                        nameTV.setText(name);
+                        amountTV.setText(R.string.sufficient);
+                        amtFloat=amtFloat-payable;
+                    }
+                    else
+                    {
+                        amountTV.setText(R.string.notSufficient);
+                    }
             }
             else {
                 Toast.makeText(HomeActivity.this,"NOT MATCHED",Toast.LENGTH_SHORT).show();
             }
-
-        return 0;
         }
 
-
-    void payFunction(){
-        payable = Float.valueOf(cost.getText().toString().trim());
-        Intent intent = new Intent(HomeActivity.this, JSGDActivity.class);
-        intent.putExtra("payable",payable);
-        startActivity(intent);
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void CaptureFingerPrint(){
@@ -549,8 +578,8 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
 
 //        this.mCheckBoxMatched.setChecked(false);
 //        dwTimeStart = System.currentTimeMillis();
-        sgfplib.GetImageEx(mRegisterImage, IMAGE_CAPTURE_TIMEOUT_MS,IMAGE_CAPTURE_QUALITY);
-        DumpFile("register.raw", mRegisterImage);
+          sgfplib.GetImageEx(mRegisterImage, IMAGE_CAPTURE_TIMEOUT_MS,IMAGE_CAPTURE_QUALITY);
+//        DumpFile("register.raw", mRegisterImage);
 //        dwTimeEnd = System.currentTimeMillis();
 //        dwTimeElapsed = dwTimeEnd-dwTimeStart;
 //        debugMessage("GetImageEx() ret:" + result + " [" + dwTimeElapsed + "ms]\n");

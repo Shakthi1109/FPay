@@ -45,6 +45,10 @@
                 android:resource="@xml/device_filter" />
         </activity>
         <activity android:name="SecuGen.Demo.RegisterActivity" />
+        <activity
+            android:name="SecuGen.Demo.pinActivity"
+            android:label="@string/title_activity_pin"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="android.support.VERSION"
