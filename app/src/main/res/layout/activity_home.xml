@@ -11,8 +11,9 @@
         android:id="@+id/nextbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/regBtn"
-        android:layout_centerVertical="true"
+        android:layout_alignBaseline="@+id/regBtn"
+        android:layout_alignBottom="@+id/regBtn"
+        android:layout_centerHorizontal="true"
         android:text="Pay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -24,8 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="19dp"
         android:text="Register"
         tools:layout_editor_absoluteX="246dp"
         tools:layout_editor_absoluteY="431dp" />
@@ -36,9 +38,77 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="67dp"
+        android:layout_marginTop="14dp"
         android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="Cost" />
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cost"
+        android:layout_marginTop="25dp"
+        android:layout_toStartOf="@+id/cost"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/textViewAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textViewName"
+        android:layout_below="@+id/textViewName"
+        android:layout_marginTop="21dp"
+        android:text="Amount" />
+
+    <ImageView
+        android:id="@+id/imageViewPayment"
+        android:layout_width="173dp"
+        android:layout_height="132dp"
+        android:layout_above="@+id/nextbtn"
+        android:layout_marginBottom="50dp"
+        android:layout_toStartOf="@+id/regBtn"
+        android:layout_x="103dp"
+        android:layout_y="239dp"
+        android:contentDescription="@string/fingerprint_capture_image"
+        android:src="@android:drawable/picture_frame" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/textViewTemplate"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_below="@+id/textViewAmount"-->
+        <!--android:layout_marginTop="12dp"-->
+        <!--android:text="template" />-->
+
+    <Button
+        android:id="@+id/buttonRetrive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageViewPayment"
+        android:layout_marginStart="30dp"
+        android:text="Retrive" />
+
+    <Button
+        android:id="@+id/scanFpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewAmount"
+        android:layout_marginTop="30dp"
+        android:layout_toStartOf="@+id/nextbtn"
+        android:text="Scan FP" />
+
+    <Button
+        android:id="@+id/buttonLedOnPayment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/scanFpBtn"
+        android:layout_alignTop="@+id/scanFpBtn"
+        android:layout_toEndOf="@+id/nextbtn"
+        android:layout_x="261dp"
+        android:layout_y="155dp"
+        android:text="LED"
+        android:textSize="28sp" />
 
 </RelativeLayout>

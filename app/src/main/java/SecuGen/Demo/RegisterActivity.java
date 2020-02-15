@@ -1,9 +1,14 @@
 package SecuGen.Demo;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Objects;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -15,10 +20,12 @@ import android.content.IntentFilter;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -71,9 +78,15 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     private JSGFPLib sgfplib;
     private boolean usbPermissionRequested;
     String NFIQString,buffer;
+
+
+    private byte[] mRegisterImage;
+    private byte[] mRegisterTemplate;
+
+
     Button registerBtn,choose,upload;
     EditText Name, Amt;
-    String nameStr;
+    String nameStr,template,uploadToFirebase;
     float amtFloat;
 
     String fpimg;
@@ -91,8 +104,10 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     //This message handler is used to access local resources not
     //accessible by SGFingerPresentCallback() because it is called by
     //a separate thread.
+    @SuppressLint("HandlerLeak")
     public Handler fingerDetectedHandler = new Handler(){
         // @Override
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void handleMessage(Message msg) {
             //Handle the message
             CaptureFingerPrint();
@@ -131,8 +146,6 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
         Name = (EditText) findViewById(R.id.editName);
         Amt = (EditText) findViewById(R.id.editAmt);
         registerBtn = (Button)findViewById(R.id.registerBtn);
-        upload = (Button)findViewById(R.id.upload);
-        choose = (Button)findViewById(R.id.choose);
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
@@ -186,9 +199,15 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
                 else {
                     nameStr = Name.getText().toString().trim();
                     amtFloat = Float.valueOf(Amt.getText().toString().trim());
+                    if(mRegisterTemplate==null)
+                    {
+                        Toast.makeText(RegisterActivity.this,"Enrol finger",Toast.LENGTH_SHORT).show();
+                    }
+                    template = uploadToFirebase;
 
                     member.setNameStr(nameStr);
                     member.setAmtFloat(amtFloat);
+                    member.setTemplate(template);
 
                     reff.child(String.valueOf(maxid+1)).setValue(member);
                     Toast.makeText(RegisterActivity.this,"Successfully Registered",Toast.LENGTH_SHORT).show();
@@ -208,6 +227,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     @Override
     public void onPause() {
         Log.d(TAG, "Enter onPause()");
+
+        mRegisterTemplate = null;
+
         if (bSecuGenDeviceOpened)
         {
             autoOn.stop();
@@ -305,6 +327,10 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
 
                         sgfplib.SetTemplateFormat(SGFDxTemplateFormat.TEMPLATE_FORMAT_ISO19794);
                         sgfplib.GetMaxTemplateSize(mMaxTemplateSize);
+
+                        mRegisterTemplate = new byte[(int)mMaxTemplateSize[0]];
+
+
                         EnableControls();
 
                         if (mAutoOnEnabled){
@@ -325,6 +351,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     @Override
     public void onDestroy() {
         Log.d(TAG, "Enter onDestroy()");
+        mRegisterTemplate = null;
         sgfplib.CloseDevice();
         sgfplib.Close();
         super.onDestroy();
@@ -413,17 +440,18 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     public void DumpFile(String fileName, byte[] buffer)
     {
         //Uncomment section below to dump images and templates to SD card
-       /*
+
         try {
             File myFile = new File("/sdcard/Download/" + fileName);
             myFile.createNewFile();
             FileOutputStream fOut = new FileOutputStream(myFile);
             fOut.write(buffer,0,buffer.length);
+            Toast.makeText(RegisterActivity.this,"Downloaded",Toast.LENGTH_SHORT).show();
             fOut.close();
         } catch (Exception e) {
-            debugMessage("Exception when writing file" + fileName);
+            Log.d("D","Exception when writing file" + fileName);
         }
-       */
+
     }
 
 
@@ -434,30 +462,146 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void CaptureFingerPrint(){
-        long dwTimeStart = 0, dwTimeEnd = 0, dwTimeElapsed = 0;
-        byte[] buffer = new byte[mImageWidth*mImageHeight];
-        dwTimeStart = System.currentTimeMillis();
-        //long result = sgfplib.GetImage(buffer);
-        long result = sgfplib.GetImageEx(buffer, IMAGE_CAPTURE_TIMEOUT_MS,IMAGE_CAPTURE_QUALITY);
-
-
-        long nfiq = sgfplib.ComputeNFIQ(buffer, mImageWidth, mImageHeight);
-        //long nfiq = sgfplib.ComputeNFIQEx(buffer, mImageWidth, mImageHeight,500);
-        NFIQString =  new String("NFIQ="+ nfiq);
-        DumpFile("capture2016.raw", buffer);
-        dwTimeEnd = System.currentTimeMillis();
-        dwTimeElapsed = dwTimeEnd-dwTimeStart;
-
-        mTextViewResult.setText("getImageEx(10000,50) ret: " + result + " [" + dwTimeElapsed + "ms] " + NFIQString +"\n");
-        mImageViewFingerprint.setImageBitmap(this.toGrayscale(buffer));
-
-//        Log.d("lwelele", Arrays.toString(buffer));
 //
-//        fpimg = Arrays.toString(buffer);
+//        Log.d("jajajajajaj", "Im getting exxt");
+//        long dwTimeStart = 0, dwTimeEnd = 0, dwTimeElapsed = 0;
+//        byte[] buffer = new byte[mImageWidth*mImageHeight];
+//        dwTimeStart = System.currentTimeMillis();
+//        //long result = sgfplib.GetImage(buffer);
+//        long result = sgfplib.GetImageEx(buffer, IMAGE_CAPTURE_TIMEOUT_MS,IMAGE_CAPTURE_QUALITY);
+//
+//
+//        long nfiq = sgfplib.ComputeNFIQ(buffer, mImageWidth, mImageHeight);
+//        //long nfiq = sgfplib.ComputeNFIQEx(buffer, mImageWidth, mImageHeight,500);
+//        NFIQString =  new String("NFIQ="+ nfiq);
+//        DumpFile("capture2016.raw", buffer);
+//        dwTimeEnd = System.currentTimeMillis();
+//        dwTimeElapsed = dwTimeEnd-dwTimeStart;
+//
+//        mTextViewResult.setText("getImageEx(10000,50) ret: " + result + " [" + dwTimeElapsed + "ms] " + NFIQString +"\n");
+//        mImageViewFingerprint.setImageBitmap(this.toGrayscale(buffer));
+//
+////        Log.d("lwelele", Arrays.toString(buffer));
+////        fpimg = Arrays.toString(buffer);
+//
+//        UploadTask uploadTask = mStorageRef.putBytes(buffer);
+//        uploadTask.addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                Log.d("D","Not uploaded");
+//            }
+//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                String Uri = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+//                Log.d("D","Not uploaded");
+//            }
+//        });
+//
+//        buffer = null;
 
 
-        buffer = null;
+
+
+        //DEBUG Log.d(TAG, "Clicked REGISTER");
+        if (mRegisterImage != null)
+            mRegisterImage = null;
+        mRegisterImage = new byte[mImageWidth*mImageHeight];
+
+//        this.mCheckBoxMatched.setChecked(false);
+//        dwTimeStart = System.currentTimeMillis();
+        long result = sgfplib.GetImageEx(mRegisterImage, IMAGE_CAPTURE_TIMEOUT_MS,IMAGE_CAPTURE_QUALITY);
+        DumpFile("register.raw", mRegisterImage);
+//        dwTimeEnd = System.currentTimeMillis();
+//        dwTimeElapsed = dwTimeEnd-dwTimeStart;
+//        debugMessage("GetImageEx() ret:" + result + " [" + dwTimeElapsed + "ms]\n");
+        mImageViewFingerprint.setImageBitmap(this.toGrayscale(mRegisterImage));
+//        dwTimeStart = System.currentTimeMillis();
+        result = sgfplib.SetTemplateFormat(SecuGen.FDxSDKPro.SGFDxTemplateFormat.TEMPLATE_FORMAT_ISO19794);
+//        dwTimeEnd = System.currentTimeMillis();
+//        dwTimeElapsed = dwTimeEnd-dwTimeStart;
+//        debugMessage("SetTemplateFormat(ISO19794) ret:" +  result + " [" + dwTimeElapsed + "ms]\n");
+
+        int quality1[] = new int[1];
+        result = sgfplib.GetImageQuality(mImageWidth, mImageHeight, mRegisterImage, quality1);
+        //debugMessage("GetImageQuality() ret:" +  result + "quality [" + quality1[0] + "]\n");
+
+        SGFingerInfo fpInfo = new SGFingerInfo();
+        fpInfo.FingerNumber = 1;
+        fpInfo.ImageQuality = quality1[0];
+        fpInfo.ImpressionType = SGImpressionType.SG_IMPTYPE_LP;
+        fpInfo.ViewNumber = 1;
+
+        for (int i=0; i< mRegisterTemplate.length; ++i)
+            mRegisterTemplate[i] = 0;
+        result = sgfplib.CreateTemplate(fpInfo, mRegisterImage, mRegisterTemplate);
+        DumpFile("register.min", mRegisterTemplate);
+
+        int[] size = new int[1];
+        result = sgfplib.GetTemplateSize(mRegisterTemplate, size);
+
+        uploadToFirebase = Arrays.toString(mRegisterTemplate);
+
+
+
+
+
+        //Printing byte Array
+//        PrintStream ps = new PrintStream(System.out);
+//
+//        // write bytes 1-3
+//        System.out.println("here here here");
+//        String
+//        Log.d("lolololo",);
+
+
+
+        //Printing
+//        String s1,s2,s3;
+//        s1=Arrays.toString(mRegisterTemplate);   //best
+//        s2= new String(mRegisterTemplate);
+//        s3=Base64.getEncoder().encodeToString(mRegisterTemplate);
+//
+//
+//        Log.d("TestToarraysbest",s1);
+//        Log.d("TestToarrays",s2);
+//        Log.d("TestToarrays",s3);
+//
+//        byte [] b1,b2,b3;
+//
+//        b1=s1.getBytes();
+//        b2=s2.getBytes();
+//        b3=Base64.getDecoder().decode(s3);  //best
+//
+//        Log.d("TestToarrays",Arrays.toString(b1));
+//        Log.d("TestToarrays",Arrays.toString(b2));
+//        Log.d("TestToarraysbest",Arrays.toString(b3));
+
+
+
+        //loop for printing template
+
+//        String out;
+//        for (int i=0;i<264;i++)
+//        {
+//            out=out+
+//        }
+//
+//        Log.d("Test111",uploadToFirebase);
+//
+//        Log.d("testType111",uploadToFirebase.getClass().getSimpleName());
+//
+//        byte [] downloadFrmFirebase= Base64.getDecoder().decode(uploadToFirebase);
+//
+//        Log.d("test222",Arrays.toString(downloadFrmFirebase));
+//
+//        Log.d("testType222",downloadFrmFirebase.getClass().getSimpleName());
+
+        mTextViewResult.setText("Click Verify");
+        mRegisterImage = null;
+        fpInfo = null;
 
     }
 
@@ -470,25 +614,27 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
 
     private void Fileuploader(){
 
-        StorageReference Ref=mStorageRef.child(System.currentTimeMillis()+"."+getExtension(imguri));
-        Log.d("RRRRR",imguri.toString());
-        Ref.putFile(imguri)
+//        StorageReference Ref=mStorageRef.child(System.currentTimeMillis()+"."+getExtension(imguri));
+//        Log.d("RRRRR",imguri.toString());
+//        Ref.putFile(imguri)
+//
+//                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                        // Get a URL to the uploaded content
+//                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+//                        Toast.makeText(RegisterActivity.this,"Image Uploaded successfully",Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception exception) {
+//                        // Handle unsuccessful uploads
+//                        // ...
+//                    }
+//                });
 
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // Get a URL to the uploaded content
-                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        Toast.makeText(RegisterActivity.this,"Image Uploaded successfully",Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        // ...
-                    }
-                });
+
     }
 
     private void fileChoose(){
@@ -509,6 +655,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onClick(View v) {
         long dwTimeStart = 0, dwTimeEnd = 0, dwTimeElapsed = 0;
 
@@ -520,10 +667,10 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
             fileChoose();
         }
 
-        if(v==upload){
-            Fileuploader();
-
-        }
+//        if(v==upload){
+//            Fileuploader();
+//
+//        }
 
         if (v == mButtonLed) {
             mLed = !mLed;

@@ -1,15 +1,18 @@
 package SecuGen.Demo;
 
 /**
- * Created by SHAKTHI on 19/01/2020.
+ * Created by SHAKTHI on 15/02/2020.
  */
 
 public class Member {
     String nameStr;
     float amtFloat;
+    String template;
 
-    public Member() {
-    }
+
+    public  String getTemplate() {return template;}
+
+    public void setTemplate(String template){ this.template = template; }
 
     public String getNameStr() {
         return nameStr;

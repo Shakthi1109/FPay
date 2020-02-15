@@ -526,6 +526,11 @@ public class JSGDActivity extends Activity
 	    //long result = sgfplib.GetImage(buffer);	    
 	    long result = sgfplib.GetImageEx(buffer, IMAGE_CAPTURE_TIMEOUT_MS,IMAGE_CAPTURE_QUALITY);
 
+//		Log.d("myTag_buffer", buffer.toString());
+//
+//		Log.d("myTag_result",""+result);
+
+
 	    String NFIQString;
 	    if (this.mToggleButtonNFIQ.isChecked()) {
 	    	long nfiq = sgfplib.ComputeNFIQ(buffer, mImageWidth, mImageHeight);
@@ -665,7 +670,8 @@ public class JSGDActivity extends Activity
             debugMessage("GetTemplateSize() ret:" + result+ " size [" + size[0] + "]\n");
             
             
-            mImageViewRegister.setImageBitmap(this.toGrayscale(mRegisterImage));  
+            mImageViewRegister.setImageBitmap(this.toGrayscale(mRegisterImage));
+//            Log.d("aa",mRegisterImage)
     	    mTextViewResult.setText("Click Verify");
     	    mRegisterImage = null;
     	    fpInfo = null;
@@ -719,7 +725,7 @@ public class JSGDActivity extends Activity
             result = sgfplib.MatchTemplate(mRegisterTemplate, mVerifyTemplate, SGFDxSecurityLevel.SL_NORMAL, matched);
 
 			Log.d("lol", Long.toString(result));
-			Log.d("lalala", Arrays.toString(mRegisterTemplate).getClass().getSimpleName());
+			Log.d("lalala", Arrays.toString(mRegisterTemplate));
 			Log.d("lalala", Arrays.toString(mVerifyTemplate));
 
 

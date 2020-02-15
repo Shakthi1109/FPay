@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="139dp"
-        android:layout_y="450dp"
+        android:layout_y="414dp"
         android:text="Register"
         tools:layout_editor_absoluteX="105dp"
         tools:layout_editor_absoluteY="378dp" />
@@ -77,23 +77,4 @@
         tools:layout_editor_absoluteX="71dp"
         tools:layout_editor_absoluteY="96dp" />
 
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="216dp"
-        android:layout_y="386dp"
-        android:text="upload"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="332dp" />
-
-    <Button
-        android:id="@+id/choose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="42dp"
-        android:layout_y="388dp"
-        android:text="Choose"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="369dp" />
 </AbsoluteLayout>
