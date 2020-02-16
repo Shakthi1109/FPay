@@ -9,6 +9,7 @@ import java.util.Base64;
 import java.util.Objects;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -17,6 +18,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.net.Uri;
@@ -141,6 +143,11 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        ActionBar bar = getActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2a1735")));
+        setTitle("FPay");
+
         mButtonCapture = (Button)findViewById(R.id.buttonCapture99);
         mButtonCapture.setOnClickListener(this);
         mButtonLed = (Button)findViewById(R.id.buttonLedOn99);
@@ -200,18 +207,15 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Objects.equals(Name.getText().toString().trim(), ""))
-                    Toast.makeText(RegisterActivity.this,"Please enter Name",Toast.LENGTH_SHORT).show();
+                if(Name.getText().toString().length()==0 && nameStr==null|| Email.getText().toString().length()==0 && email==null|| pinInput.getText().toString().length()==0 || Amt.getText().toString().length()==0 || mRegisterTemplate==null) {
+                    Toast.makeText(RegisterActivity.this, "Fill all details for registration", Toast.LENGTH_SHORT).show();
+                }
                 else {
                     nameStr = Name.getText().toString().trim();
                     amtFloat = Float.valueOf(Amt.getText().toString().trim());
                     email = Email.getText().toString().trim();
                     int PIN = Integer.valueOf(pinInput.getText().toString().trim());
 
-                    if(mRegisterTemplate==null)
-                    {
-                        Toast.makeText(RegisterActivity.this,"Enrol finger",Toast.LENGTH_SHORT).show();
-                    }
                     template = uploadToFirebase;
 
                     member.setNameStr(nameStr);
@@ -223,11 +227,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
                     Toast.makeText(RegisterActivity.this,"Successfully Registered",Toast.LENGTH_SHORT).show();
                 }
 
-                Log.d("myname", nameStr);
-                //Log.d("myamt", amtFloat);
             }
         });
-        Log.d(TAG, "Exit onCreate()");
 
 
     }

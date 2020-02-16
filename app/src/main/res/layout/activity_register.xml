@@ -11,10 +11,13 @@
         android:id="@+id/buttonLedOn99"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="255dp"
-        android:layout_y="263dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:layout_x="253dp"
+        android:layout_y="289dp"
+        android:background="@drawable/circular_background"
         android:text="LED"
-        android:textSize="28sp" />
+        android:textColor="#ffffff" />
 
     <ImageView
         android:id="@+id/imageViewFingerprint99"
@@ -23,7 +26,7 @@
         android:layout_x="102dp"
         android:layout_y="329dp"
         android:contentDescription="@string/fingerprint_capture_image"
-        android:src="@android:drawable/picture_frame" />
+        android:src="@drawable/pficon" />
 
     <TextView
         android:id="@+id/textViewResult99"
@@ -36,23 +39,31 @@
 
     <Button
         android:id="@+id/buttonCapture99"
-        android:layout_width="166dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="40dp"
-        android:layout_y="263dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:layout_x="34dp"
+        android:layout_y="291dp"
+        android:background="@drawable/circular_background"
         android:text="Capture"
-        android:textSize="28sp" />
+        android:textColor="#ffffff" />
 
     <EditText
         android:id="@+id/editName"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_x="115dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_x="1dp"
         android:layout_y="14dp"
+        android:background="@drawable/circular_background_no_fill"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:gravity="center_vertical|center_horizontal"
         android:hint="Name"
-        android:gravity="center"
+        android:inputType="textPersonName"
+        android:padding="8dp"
         tools:layout_editor_absoluteX="88dp"
         tools:layout_editor_absoluteY="21dp" />
 
@@ -60,48 +71,71 @@
         android:id="@+id/registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
         android:layout_x="143dp"
-        android:layout_y="464dp"
+        android:layout_y="492dp"
+        android:background="@drawable/circular_background"
+        android:onClick="goBack"
         android:text="Register"
+        android:textColor="#ffffff"
         tools:layout_editor_absoluteX="105dp"
         tools:layout_editor_absoluteY="378dp" />
 
     <EditText
         android:id="@+id/editAmt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="73dp"
-        android:layout_y="145dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_x="1dp"
+        android:layout_y="148dp"
+        android:background="@drawable/circular_background_no_fill"
         android:ems="10"
-        android:gravity="center"
+
+        android:gravity="center_vertical|center_horizontal"
         android:hint="Link Bank Acc/Wallet"
         android:inputType="numberDecimal"
+        android:padding="8dp"
         tools:layout_editor_absoluteX="71dp"
         tools:layout_editor_absoluteY="96dp" />
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="72dp"
-        android:layout_y="79dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_x="0dp"
+        android:layout_y="84dp"
+        android:background="@drawable/circular_background_no_fill"
         android:ems="10"
-        android:gravity="center"
+        android:gravity="center_vertical|center_horizontal"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:padding="8dp"
         tools:layout_editor_absoluteX="67dp"
         tools:layout_editor_absoluteY="83dp" />
 
     <EditText
         android:id="@+id/pinInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="78dp"
-        android:layout_y="206dp"
         android:hint="Enter PIN"
-        android:gravity="center"
-        android:ems="10"
         android:inputType="numberPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_x="3dp"
+        android:layout_y="208dp"
+        android:background="@drawable/circular_background_no_fill"
+        android:ems="10"
+        android:gravity="center"
+
+        android:padding="8dp"
         tools:layout_editor_absoluteX="80dp"
         tools:layout_editor_absoluteY="188dp" />
 

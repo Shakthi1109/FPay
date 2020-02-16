@@ -1,7 +1,11 @@
 package SecuGen.Demo;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -40,6 +44,12 @@ public class pinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin);
 
+
+//        ActionBar bar = getActionBar();
+//        assert bar != null;
+//        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2a1735")));
+//        setTitle("FPay");
+
         //disp= (TextView) findViewById(R.id.disp);
         pin=(EditText) findViewById(R.id.pin);
         subBtn=(Button)findViewById(R.id.subBtn);
@@ -76,9 +86,27 @@ public class pinActivity extends AppCompatActivity {
                            Log.d("bal",balance.toString());
                            Toast.makeText(pinActivity.this,"Transaction Successful",Toast.LENGTH_SHORT).show();
 
+                           new CountDownTimer(2000, 1000) {
+                               public void onFinish() {
+                                   finish();
+                               }
+                               public void onTick(long millisUntilFinished) {
+                                   // millisUntilFinished    The amount of time until finished.
+                               }
+                           }.start();
+
+
                        }
                        else{
                            Toast.makeText(pinActivity.this,"Transaction failed. Try again!",Toast.LENGTH_SHORT).show();
+                           new CountDownTimer(2000, 1000) {
+                               public void onFinish() {
+                                   finish();
+                               }
+                               public void onTick(long millisUntilFinished) {
+                                   // millisUntilFinished    The amount of time until finished.
+                               }
+                           }.start();
                        }
                    }
                });

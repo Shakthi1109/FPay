@@ -14,9 +14,11 @@
         android:layout_alignBaseline="@+id/regBtn"
         android:layout_alignBottom="@+id/regBtn"
         android:layout_centerHorizontal="true"
-        android:layout_x="141dp"
-        android:layout_y="452dp"
+        android:layout_x="143dp"
+        android:layout_y="499dp"
+        android:background="@drawable/circular_background"
         android:text="VALIDATE"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -30,45 +32,73 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="26dp"
         android:layout_marginEnd="19dp"
-        android:layout_x="268dp"
-        android:layout_y="119dp"
+        android:layout_x="269dp"
+        android:layout_y="134dp"
+        android:background="@drawable/circular_background"
         android:text="Register"
+        android:textColor="#ffffff"
         tools:layout_editor_absoluteX="246dp"
         tools:layout_editor_absoluteY="431dp" />
 
     <EditText
         android:id="@+id/cost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_x="73dp"
-        android:layout_y="5dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_x="0dp"
+        android:layout_y="11dp"
+        android:background="@drawable/circular_background_no_fill"
         android:ems="10"
+
         android:gravity="center"
         android:hint="Bill Amount"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:padding="8dp"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="188dp" />
 
     <TextView
         android:id="@+id/textViewName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_alignBaseline="@+id/textViewAmount"
         android:layout_alignBottom="@+id/textViewAmount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
         android:layout_toStartOf="@+id/emailInput"
-        android:layout_x="179dp"
-        android:layout_y="344dp" />
+        android:layout_x="0dp"
+        android:layout_y="390dp"
+
+        android:background="@drawable/circular_background_no_fill"
+        android:ems="10"
+        android:gravity="center"
+        android:padding="8dp"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="188dp" />
 
     <TextView
         android:id="@+id/textViewAmount"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_above="@+id/regBtn"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="75dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
         android:layout_toEndOf="@+id/emailInput"
-        android:layout_x="1dp"
-        android:layout_y="369dp"
-        android:gravity="center" />
+        android:layout_x="0dp"
+        android:layout_y="442dp"
+
+        android:background="@drawable/circular_background_no_fill"
+        android:ems="10"
+        android:gravity="center"
+        android:padding="8dp"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="188dp" />
 
     <ImageView
         android:id="@+id/imageViewPayment"
@@ -77,10 +107,10 @@
         android:layout_alignBottom="@+id/textViewName"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="29dp"
-        android:layout_x="103dp"
-        android:layout_y="177dp"
+        android:layout_x="102dp"
+        android:layout_y="199dp"
         android:contentDescription="@string/fingerprint_capture_image"
-        android:src="@android:drawable/picture_frame" />
+        android:src="@drawable/pficon" />
 
     <!--<TextView-->
         <!--android:id="@+id/textViewTemplate"-->
@@ -98,9 +128,11 @@
         android:layout_alignBaseline="@+id/nextbtn"
         android:layout_alignBottom="@+id/nextbtn"
         android:layout_toStartOf="@+id/imageViewPayment"
-        android:layout_x="26dp"
-        android:layout_y="452dp"
-        android:text="SUBMIT" />
+        android:layout_x="22dp"
+        android:layout_y="497dp"
+        android:background="@drawable/circular_background"
+        android:text="SUBMIT"
+        android:textColor="#ffffff" />
 
     <Button
         android:id="@+id/scanFpBtn"
@@ -109,54 +141,71 @@
         android:layout_above="@+id/imageViewPayment"
         android:layout_marginBottom="20dp"
         android:layout_toStartOf="@+id/nextbtn"
-        android:layout_x="32dp"
-        android:layout_y="121dp"
-        android:text="Scan FP" />
+        android:layout_x="143dp"
+        android:layout_y="134dp"
+        android:background="@drawable/circular_background"
+        android:text="Scan FP"
+        android:textColor="#ffffff" />
 
     <Button
         android:id="@+id/buttonLedOnPayment"
-        android:layout_width="77dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/scanFpBtn"
         android:layout_alignTop="@+id/scanFpBtn"
         android:layout_toEndOf="@+id/nextbtn"
-        android:layout_x="152dp"
-        android:layout_y="124dp"
+        android:layout_x="12dp"
+        android:layout_y="133dp"
+        android:background="@drawable/circular_background"
         android:text="LED"
-        android:textSize="28sp" />
+        android:textColor="#ffffff" />
 
     <EditText
         android:id="@+id/emailInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/cost"
-        android:layout_below="@+id/cost"
-        android:layout_marginTop="12dp"
-        android:layout_x="75dp"
-        android:layout_y="59dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_x="0dp"
+        android:layout_y="68dp"
+        android:background="@drawable/circular_background_no_fill"
         android:ems="10"
         android:gravity="center"
+
         android:hint="Email"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="83dp" />
+        android:padding="8dp"
+
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="188dp" />
 
     <TextView
         android:id="@+id/hi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="179dp"
-        android:layout_y="318dp"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="306dp" />
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_x="3dp"
+        android:layout_y="338dp"
+        android:background="@drawable/circular_background_no_fill"
+        android:ems="10"
+        android:gravity="center"
+
+        android:padding="8dp"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="188dp" />
 
     <Button
         android:id="@+id/paybtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="267dp"
-        android:layout_y="452dp"
+        android:layout_x="271dp"
+        android:layout_y="501dp"
+        android:background="@drawable/circular_background"
         android:text="PAY"
+        android:textColor="#ffffff"
         tools:layout_editor_absoluteX="268dp"
         tools:layout_editor_absoluteY="443dp" />
 

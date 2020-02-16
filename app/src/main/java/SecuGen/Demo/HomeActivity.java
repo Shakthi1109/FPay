@@ -1,7 +1,9 @@
 package SecuGen.Demo;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -81,6 +83,8 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
     private static final int IMAGE_CAPTURE_QUALITY = 50;
 
     int SUCCESSFLAG;
+    int VALIDATEFLAG;
+    int SUBMITFLAG;
     private Button mButtonCapture;
     private Button mButtonLed;
     private android.widget.TextView mTextViewResult;
@@ -166,8 +170,14 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        ActionBar bar = getActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2a1735")));
+        setTitle("FPay");
+
         //Adding pf scan
         SUCCESSFLAG=0;
+        SUBMITFLAG=0;
+        VALIDATEFLAG=0;
         mButtonCapture = (Button)findViewById(R.id.scanFpBtn);
         mButtonCapture.setOnClickListener(this);
         mButtonLed = (Button)findViewById(R.id.buttonLedOnPayment);
@@ -219,8 +229,15 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
             @Override
             public void onClick(View v) {
                 SUCCESSFLAG=0;
-                emailInp = EmailInp.getText().toString().trim();
-                Log.d(TAG, "nowcheck: "+emailInp);
+                if(EmailInp.getText().toString().length()==0 && emailInp==null|| cost.getText().toString().length()==0)
+                {
+                    Toast.makeText(HomeActivity.this,"Fill all details!",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    SUBMITFLAG=1;
+                    emailInp = EmailInp.getText().toString().trim();
+
+                    Log.d(TAG, "nowcheck: " + emailInp);
                     reff = FirebaseDatabase.getInstance().getReference().child("Member").child(emailInp);
                     reff.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -230,21 +247,21 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
                             registeredFpTemplate = dataSnapshot.child("template").getValue().toString();
 //                        Log.d("Redistered fp template",registeredFpTemplate);
 
-                            String a[]= registeredFpTemplate.split(", ");
-                            regFP =new byte[a.length];
-                            for(int i=0;i<a.length;i++){
-                                Log.d(TAG, "onDataChange: "+a[i]);
-                                if(i==0){
-                                    regFP[i]=Byte.valueOf(a[i].substring(1));
+                            String a[] = registeredFpTemplate.split(", ");
+                            regFP = new byte[a.length];
+                            for (int i = 0; i < a.length; i++) {
+                                Log.d(TAG, "onDataChange: " + a[i]);
+                                if (i == 0) {
+                                    regFP[i] = Byte.valueOf(a[i].substring(1));
 
-                                }else if(i==a.length-1){
-                                    regFP[i]=Byte.valueOf(a[i].substring(0,a[i].length()-1));
+                                } else if (i == a.length - 1) {
+                                    regFP[i] = Byte.valueOf(a[i].substring(0, a[i].length() - 1));
 
-                                }else{
-                                    regFP[i]=Byte.valueOf(a[i]);
+                                } else {
+                                    regFP[i] = Byte.valueOf(a[i]);
                                 }
                             }
-                            Log.d(TAG, "array from db: "+Arrays.toString(regFP));
+                            Log.d(TAG, "array from db: " + Arrays.toString(regFP));
 
 
                         }
@@ -254,7 +271,7 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
 
                         }
                     });
-
+                }
             }
         });
 
@@ -275,18 +292,30 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                matchingFingerprint(mRegisterTemplate, regFP);
+                if(SUBMITFLAG==0)
+                {
+                    Toast.makeText(HomeActivity.this,"Press Submit First!",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    matchingFingerprint(mRegisterTemplate, regFP);
+                }
             }
         });
 
         paybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = emailInp+"    "+amtFloat;
+                if (VALIDATEFLAG==0)
+                {
+                    Toast.makeText(HomeActivity.this,"Press Validate First",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    String message = emailInp + "    " + amtFloat;
 
-                Intent intent = new Intent(HomeActivity.this, pinActivity.class);
-                intent.putExtra("message",message);
-                startActivity(intent);
+                    Intent intent = new Intent(HomeActivity.this, pinActivity.class);
+                    intent.putExtra("message", message);
+                    startActivity(intent);
+                }
             }
         });
 //
@@ -488,6 +517,8 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
 
     void matchingFingerprint(byte [] regFP, byte[] scannedFpTemplate){
 
+        VALIDATEFLAG=1;
+
             boolean[] matched = new boolean[1];
             //dwTimeStart = System.currentTimeMillis();
             sgfplib.MatchTemplate(regFP,scannedFpTemplate,SGFDxSecurityLevel.SL_NORMAL, matched);
@@ -520,10 +551,12 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
                     else
                     {
                         amountTV.setText(R.string.notSufficient);
+                        VALIDATEFLAG=0;
                     }
             }
             else {
                 Toast.makeText(HomeActivity.this,"NOT MATCHED",Toast.LENGTH_SHORT).show();
+                VALIDATEFLAG=0;
             }
         }
 

@@ -35,6 +35,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                android:label="FPay"
             </intent-filter>
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
@@ -48,7 +49,7 @@
         <activity
             android:name="SecuGen.Demo.pinActivity"
             android:label="@string/title_activity_pin"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
 
         <meta-data
             android:name="android.support.VERSION"
