@@ -86,7 +86,7 @@ public class pinActivity extends AppCompatActivity {
                            Log.d("bal",balance.toString());
                            Toast.makeText(pinActivity.this,"Transaction Successful",Toast.LENGTH_SHORT).show();
 
-                           new CountDownTimer(2000, 1000) {
+                           new CountDownTimer(500, 500) {
                                public void onFinish() {
                                    finish();
                                }
@@ -99,7 +99,7 @@ public class pinActivity extends AppCompatActivity {
                        }
                        else{
                            Toast.makeText(pinActivity.this,"Transaction failed. Try again!",Toast.LENGTH_SHORT).show();
-                           new CountDownTimer(2000, 1000) {
+                           new CountDownTimer(500, 500) {
                                public void onFinish() {
                                    finish();
                                }

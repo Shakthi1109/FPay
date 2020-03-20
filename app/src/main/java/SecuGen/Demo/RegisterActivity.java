@@ -143,6 +143,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        Log.d(TAG, "Enter onCreate()");
+
 
         ActionBar bar = getActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2a1735")));
@@ -162,6 +164,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
+
 
 
         grayBuffer = new int[JSGFPLib.MAX_IMAGE_WIDTH_ALL_DEVICES*JSGFPLib.MAX_IMAGE_HEIGHT_ALL_DEVICES];
@@ -225,6 +228,12 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
 
                     reff.child(email).setValue(member);
                     Toast.makeText(RegisterActivity.this,"Successfully Registered",Toast.LENGTH_SHORT).show();
+
+                    Name.setText("");
+                    Amt.setText("");
+                    Email.setText("");
+                    pinInput.setText("");
+                    mImageViewFingerprint.setImageBitmap(grayBitmap);
                 }
 
             }
@@ -262,68 +271,67 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
         super.onResume();
         DisableControls();
         long error = sgfplib.Init( SGFDxDeviceName.SG_DEV_AUTO);
-        if (error != SGFDxErrorCode.SGFDX_ERROR_NONE){
-            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-            if (error == SGFDxErrorCode.SGFDX_ERROR_DEVICE_NOT_FOUND)
-                dlgAlert.setMessage("The attached fingerprint device is not supported on Android");
-            else
-                dlgAlert.setMessage("Fingerprint device initialization failed!");
-            dlgAlert.setTitle("SecuGen Fingerprint SDK");
-            dlgAlert.setPositiveButton("OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int whichButton){
-                            finish();
-                            return;
-                        }
-                    }
-            );
-            dlgAlert.setCancelable(false);
-            dlgAlert.create().show();
-        }
-        else {
-            UsbDevice usbDevice = sgfplib.GetUsbDevice();
-            if (usbDevice == null){
-                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-                dlgAlert.setMessage("SecuGen fingerprint sensor not found!");
-                dlgAlert.setTitle("SecuGen Fingerprint SDK");
-                dlgAlert.setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int whichButton){
-                                finish();
-                                return;
-                            }
-                        }
-                );
-                dlgAlert.setCancelable(false);
-                dlgAlert.create().show();
-            }
-            else {
-                boolean hasPermission = sgfplib.GetUsbManager().hasPermission(usbDevice);
-                if (!hasPermission) {
-                    if (!usbPermissionRequested)
-                    {
-                        usbPermissionRequested = true;
-                        sgfplib.GetUsbManager().requestPermission(usbDevice, mPermissionIntent);
-                    }
-                    else
-                    {
-                        //wait up to 20 seconds for the system to grant USB permission
-                        hasPermission = sgfplib.GetUsbManager().hasPermission(usbDevice);
-                        //debugMessage("Waiting for USB Permission\n");
-                        int i=0;
-                        while ((hasPermission == false) && (i <= 40))
-                        {
-                            ++i;
-                            hasPermission = sgfplib.GetUsbManager().hasPermission(usbDevice);
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+        if (error == SGFDxErrorCode.SGFDX_ERROR_NONE){
+//            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+//            if (error == SGFDxErrorCode.SGFDX_ERROR_DEVICE_NOT_FOUND)
+//                dlgAlert.setMessage("The attached fingerprint device is not supported on Android");
+//            else
+//                dlgAlert.setMessage("Fingerprint device initialization failed!");
+//            dlgAlert.setTitle("SecuGen Fingerprint SDK");
+//            dlgAlert.setPositiveButton("OK",
+//                    new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog,int whichButton){
+//                            finish();
+//                            return;
+//                        }
+//                    }
+//            );
+//            dlgAlert.setCancelable(false);
+//            dlgAlert.create().show();
 
-                        }
-                    }
-                }
+            UsbDevice usbDevice = sgfplib.GetUsbDevice();
+            if (usbDevice != null){
+//                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+//                dlgAlert.setMessage("SecuGen fingerprint sensor not found!");
+//                dlgAlert.setTitle("SecuGen Fingerprint SDK");
+//                dlgAlert.setPositiveButton("OK",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog,int whichButton){
+//                                finish();
+//                                return;
+//                            }
+//                        }
+//                );
+//                dlgAlert.setCancelable(false);
+//                dlgAlert.create().show();
+
+                //boolean hasPermission = sgfplib.GetUsbManager().hasPermission(usbDevice);
+                boolean hasPermission = true;
+//                if (!hasPermission) {
+//                    if (!usbPermissionRequested)
+//                    {
+//                        usbPermissionRequested = true;
+//                        sgfplib.GetUsbManager().requestPermission(usbDevice, mPermissionIntent);
+//                    }
+//                    else
+//                    {
+//                        //wait up to 20 seconds for the system to grant USB permission
+//                        hasPermission = sgfplib.GetUsbManager().hasPermission(usbDevice);
+//                        //debugMessage("Waiting for USB Permission\n");
+//                        int i=0;
+//                        while ((hasPermission == false) && (i <= 40))
+//                        {
+//                            ++i;
+//                            hasPermission = sgfplib.GetUsbManager().hasPermission(usbDevice);
+//                            try {
+//                                Thread.sleep(500);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                        }
+//                    }
+//                }
                 if (hasPermission) {
 
                     error = sgfplib.OpenDevice(0);

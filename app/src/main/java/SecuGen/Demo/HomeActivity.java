@@ -359,13 +359,13 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
         mRegisterTemplate = null;
 
 
-        if (bSecuGenDeviceOpened)
-        {
-            autoOn.stop();
-            EnableControls();
-            sgfplib.CloseDevice();
-            bSecuGenDeviceOpened = false;
-        }
+//        if (bSecuGenDeviceOpened)
+//        {
+//            autoOn.stop();
+//            EnableControls();
+//            sgfplib.CloseDevice();
+//            bSecuGenDeviceOpened = false;
+//        }
 
         mImageViewFingerprint.setImageBitmap(grayBitmap);
         super.onPause();
