@@ -14,7 +14,9 @@
     <!-- <application> -->
     <application
         android:debuggable="true"
+        android:icon="@drawable/pficon"
         tools:ignore="HardcodedDebugMode">
+
         <activity
             android:name=".JSGDActivity"
             android:label="FPay"

@@ -113,13 +113,13 @@
         android:src="@drawable/pficon" />
 
     <!--<TextView-->
-        <!--android:id="@+id/textViewTemplate"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_below="@+id/textViewAmount"-->
-        <!--android:layout_marginTop="12dp"-->
-        <!--android:text="template" />-->
+    <!--android:id="@+id/textViewTemplate"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_below="@+id/textViewAmount"-->
+    <!--android:layout_marginTop="12dp"-->
+    <!--android:text="template" />-->
 
     <Button
         android:id="@+id/buttonRetrive"

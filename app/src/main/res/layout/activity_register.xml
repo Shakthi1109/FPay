@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:layout_x="253dp"
-        android:layout_y="289dp"
+        android:layout_x="254dp"
+        android:layout_y="283dp"
         android:background="@drawable/circular_background"
         android:text="LED"
         android:textColor="#ffffff" />
@@ -23,8 +23,8 @@
         android:id="@+id/imageViewFingerprint99"
         android:layout_width="173dp"
         android:layout_height="132dp"
-        android:layout_x="102dp"
-        android:layout_y="329dp"
+        android:layout_x="104dp"
+        android:layout_y="350dp"
         android:contentDescription="@string/fingerprint_capture_image"
         android:src="@drawable/pficon" />
 
@@ -43,8 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:layout_x="34dp"
-        android:layout_y="291dp"
+        android:layout_x="43dp"
+        android:layout_y="283dp"
         android:background="@drawable/circular_background"
         android:text="Capture"
         android:textColor="#ffffff" />
@@ -73,8 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:layout_x="143dp"
-        android:layout_y="492dp"
+        android:layout_x="142dp"
+        android:layout_y="500dp"
         android:background="@drawable/circular_background"
         android:onClick="goBack"
         android:text="Register"

@@ -234,6 +234,7 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
                     Toast.makeText(HomeActivity.this,"Fill all details!",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    Toast.makeText(HomeActivity.this,"Please wait...",Toast.LENGTH_SHORT).show();
                     SUBMITFLAG=1;
                     emailInp = EmailInp.getText().toString().trim();
 
@@ -311,6 +312,12 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
                 }
                 else {
                     String message = emailInp + "    " + amtFloat;
+                    //workkkkk
+                    hi.setText("");
+                    nameTV.setText("");
+                    amountTV.setText("");
+                    cost.setText("");
+                    EmailInp.setText("");
 
                     Intent intent = new Intent(HomeActivity.this, pinActivity.class);
                     intent.putExtra("message", message);
@@ -519,12 +526,12 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
 
         VALIDATEFLAG=1;
 
-            boolean[] matched = new boolean[1];
-            //dwTimeStart = System.currentTimeMillis();
-            sgfplib.MatchTemplate(regFP,scannedFpTemplate,SGFDxSecurityLevel.SL_NORMAL, matched);
+        boolean[] matched = new boolean[1];
+        //dwTimeStart = System.currentTimeMillis();
+        sgfplib.MatchTemplate(regFP,scannedFpTemplate,SGFDxSecurityLevel.SL_NORMAL, matched);
 
-            Log.d("output user",Arrays.toString(scannedFpTemplate));
-            Log.d("output data",Arrays.toString(regFP));
+        Log.d("output user",Arrays.toString(scannedFpTemplate));
+        Log.d("output data",Arrays.toString(regFP));
 
 
 //			TextView test = (TextView) findViewById(R.id.test);
@@ -533,32 +540,32 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
 //            dwTimeEnd = System.currentTimeMillis();
 //            dwTimeElapsed = dwTimeEnd-dwTimeStart;
 //            debugMessage("MatchTemplate() ret:" + result+ " [" + dwTimeElapsed + "ms]\n");
-            if (matched[0]) {
-                Toast.makeText(HomeActivity.this,"MATCHED",Toast.LENGTH_SHORT).show();
+        if (matched[0]) {
+            Toast.makeText(HomeActivity.this,"MATCHED",Toast.LENGTH_SHORT).show();
 
-                    payable = Float.valueOf(cost.getText().toString().trim());
+            payable = Float.valueOf(cost.getText().toString().trim());
 
 
-                    //amountTV.setText(amount);
-                amtFloat=Float.valueOf(amount);
-                    if(payable<amtFloat)
-                    {
-                        hi.setText(R.string.hi);
-                        nameTV.setText(name);
-                        amountTV.setText(R.string.sufficient);
-                        amtFloat=amtFloat-payable;
-                    }
-                    else
-                    {
-                        amountTV.setText(R.string.notSufficient);
-                        VALIDATEFLAG=0;
-                    }
+            //amountTV.setText(amount);
+            amtFloat=Float.valueOf(amount);
+            if(payable<amtFloat)
+            {
+                hi.setText(R.string.hi);
+                nameTV.setText(name);
+                amountTV.setText(R.string.sufficient);
+                amtFloat=amtFloat-payable;
             }
-            else {
-                Toast.makeText(HomeActivity.this,"NOT MATCHED",Toast.LENGTH_SHORT).show();
+            else
+            {
+                amountTV.setText(R.string.notSufficient);
                 VALIDATEFLAG=0;
             }
         }
+        else {
+            Toast.makeText(HomeActivity.this,"NOT MATCHED",Toast.LENGTH_SHORT).show();
+            VALIDATEFLAG=0;
+        }
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -611,7 +618,7 @@ public class HomeActivity extends Activity implements View.OnClickListener, java
 
 //        this.mCheckBoxMatched.setChecked(false);
 //        dwTimeStart = System.currentTimeMillis();
-          sgfplib.GetImageEx(mRegisterImage, IMAGE_CAPTURE_TIMEOUT_MS,IMAGE_CAPTURE_QUALITY);
+        sgfplib.GetImageEx(mRegisterImage, IMAGE_CAPTURE_TIMEOUT_MS,IMAGE_CAPTURE_QUALITY);
 //        DumpFile("register.raw", mRegisterImage);
 //        dwTimeEnd = System.currentTimeMillis();
 //        dwTimeElapsed = dwTimeEnd-dwTimeStart;

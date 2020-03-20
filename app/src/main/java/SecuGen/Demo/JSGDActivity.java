@@ -668,8 +668,7 @@ public class JSGDActivity extends Activity
             int[] size = new int[1];
             result = sgfplib.GetTemplateSize(mRegisterTemplate, size);
             debugMessage("GetTemplateSize() ret:" + result+ " size [" + size[0] + "]\n");
-            
-            
+
             mImageViewRegister.setImageBitmap(this.toGrayscale(mRegisterImage));
 //            Log.d("aa",mRegisterImage)
     	    mTextViewResult.setText("Click Verify");

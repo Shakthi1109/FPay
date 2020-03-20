@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Feb 16 07:00:08 IST 2020
+#Fri Mar 20 11:23:30 IST 2020
 56.path=lib/armeabi-v7a/libjnisgfdu07.so
 5.base=D\:\\Desktop\\FPayFinal\\SecuGenUSBDist\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 42.base=D\:\\Desktop\\FPayFinal\\SecuGenUSBDist\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0

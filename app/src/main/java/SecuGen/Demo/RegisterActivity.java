@@ -363,8 +363,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
     public void onDestroy() {
         Log.d(TAG, "Enter onDestroy()");
         mRegisterTemplate = null;
-        sgfplib.CloseDevice();
-        sgfplib.Close();
+//        sgfplib.CloseDevice();
+//        sgfplib.Close();
         super.onDestroy();
         Log.d(TAG, "Exit onDestroy()");
     }
@@ -706,4 +706,3 @@ public class RegisterActivity extends Activity implements View.OnClickListener, 
         }
     }
 }
-

@@ -13,6 +13,16 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\SHAKTHI\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\343fb660b285c9a029c86085f0e87f3d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="23"
+        optimize="true"
+        revision="28.0.3"
+        sha1="58b12bdb21a84f22e0dc3b047aeceb0a546b1b44">
+        <dex dex="D:\Desktop\FPayFinal\SecuGenUSBDist\app\build\intermediates\transforms\preDex\release\12.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\SHAKTHI\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\e68ec58037f07934406f2d9ebd453abb\jars\classes.jar"
         jumboMode="false"
         min-sdk-version="23"
@@ -60,16 +70,6 @@
         revision="28.0.3"
         sha1="04a44d20bec92359951d025757218220f93b5d4b">
         <dex dex="D:\Desktop\FPayFinal\SecuGenUSBDist\app\build\intermediates\transforms\preDex\release\18.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\SHAKTHI\.gradle\caches\transforms-1\files-1.1\firebase-database-16.0.1.aar\7a810f381e4b75ee60773bbe62418c4b\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="23"
-        optimize="true"
-        revision="28.0.3"
-        sha1="c05262d45e7720198b120bbb5463f78ad345baa4">
-        <dex dex="D:\Desktop\FPayFinal\SecuGenUSBDist\app\build\intermediates\transforms\preDex\release\5.jar" />
     </item>
     <item
         is-multidex="false"
@@ -203,6 +203,16 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\SHAKTHI\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\15782d9719b9aa548451599f3b85ad11\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="23"
+        optimize="true"
+        revision="28.0.3"
+        sha1="a37fc31c5ceeaa4532a37358add1b189d8db4af1">
+        <dex dex="D:\Desktop\FPayFinal\SecuGenUSBDist\app\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\SHAKTHI\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\1eb68488ec34a9b2cb11a192d01c2bc4\jars\classes.jar"
         jumboMode="false"
         min-sdk-version="23"
@@ -220,6 +230,16 @@
         revision="28.0.3"
         sha1="1e224748cbf54c34eac0bca6376922468b786775">
         <dex dex="D:\Desktop\FPayFinal\SecuGenUSBDist\app\build\intermediates\transforms\preDex\release\14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\SHAKTHI\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\4b3328d80f6449601a6291cbb4925e9c\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="23"
+        optimize="true"
+        revision="28.0.3"
+        sha1="b12cd9c87c3dfb012a911b6e38d2444ed0a65e1f">
+        <dex dex="D:\Desktop\FPayFinal\SecuGenUSBDist\app\build\intermediates\transforms\preDex\release\11.jar" />
     </item>
     <item
         is-multidex="false"
